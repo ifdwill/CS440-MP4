@@ -24,7 +24,7 @@ import numpy as np
 def minibatch_gd(epoch, w1, w2, w3, w4, b1, b2, b3, b4, x_train, y_train, num_classes, shuffle=True):
 
     #IMPLEMENT HERE
-
+    losses = 0
     return w1, w2, w3, w4, b1, b2, b3, b4, losses
 
 """
@@ -89,9 +89,15 @@ def affine_forward(A, W, b):
 	return Z, cache
 
 def affine_backward(dZ, cache):
-
+    """
+    Inputs: dZ
+            cache
+    Outputs: dA
+             dW
+             dB
+    """
+  
     A, W, b = cache
-    #dA, dW, dB = None
     
     N = A.shape[0]
     D = np.prod(A.shape[1:])
@@ -105,13 +111,21 @@ def affine_backward(dZ, cache):
     return dA, dW, dB
 
 def relu_forward(Z):
-    
+    """
+    Inputs: Z
+    Ouputs: A
+            cache
+    """
     A = np.maximum(0, Z)
     cache = Z
     return A, cache
 
 def relu_backward(dA, cache):
-
+    """
+    Inputs: dA
+            cache
+    Outputs: dA
+    """
     Z = cache
     dA = np.array(dA, copy=True)
     dA[Z <=0] = 0
@@ -119,4 +133,22 @@ def relu_backward(dA, cache):
     return dA
 
 def cross_entropy(F, y):
+    """
+    Inputs: F
+            y
+    Outputs: loss
+             dF
+    """
+
+    n = F.shape[0]
+    yint = y.astype(int)
+
+    probability = np.exp(F-np.max(F, axis=1, keepdims=True))
+    probability /= np.sum(probability, axis=1, keepdims=True)
+    loss = -np.sum(np.log(probability[np.arange(n), yint]))/n
+
+    dF = probability.copy()
+    dF[np.arange(n), yint] -= 1
+    dF /= n
+
     return loss, dF
