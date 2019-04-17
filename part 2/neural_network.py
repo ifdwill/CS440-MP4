@@ -21,7 +21,7 @@ import numpy as np
         Good idea to print the epoch number at each iteration for sanity checks!
         (Stdout print will not affect autograder as long as runtime is within limits)
 """
-def minibatch_gd(epoch, w1, w2, w3, w4, b1, b2, b3, b4, x_train, y_train, num_classes, shuffle=True):
+def minibatch_gd(epoch, w1, w2, w3, w4, b1, b2, b3, b4, x_train, y_train, num_classes, shuffle=False):
 
     #IMPLEMENT HERE
     losses = []
@@ -29,18 +29,16 @@ def minibatch_gd(epoch, w1, w2, w3, w4, b1, b2, b3, b4, x_train, y_train, num_cl
         print("Epoch %d" % i)
         secondrange = len(x_train)/200
         losstotal = 0
-        for i in range(secondrange):
-            if shuffle :
-                state = np.random.get_state()
-                np.random.shuffle(x_train)
-                np.random.set_state(state)
-                np.random.shuffle(y_train)
-                X = x_train[0:200]
-                y = y_train[0:200]
-                
-            else :
-                X = x_train[i*200:(i+1)*200]
-                y = y_train[i*200:(i+1)*200]
+
+        if shuffle :
+            state = np.random.get_state()
+            np.random.shuffle(x_train) 
+            np.random.set_state(state) #this should shuffle them in parallel
+            np.random.shuffle(y_train)
+
+        for j in range(secondrange):
+            X = x_train[j*200:(j+1)*200]
+            y = y_train[j*200:(j+1)*200]
             losstemp, w1, w2, w3, w4, b1, b2, b3, b4 = four_nn(X, w1, w2, w3, w4, b1, b2, b3, b4, y, test=False)
             losstotal+=losstemp
         #print(losstemp)
