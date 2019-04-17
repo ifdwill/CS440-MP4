@@ -26,7 +26,7 @@ def minibatch_gd(epoch, w1, w2, w3, w4, b1, b2, b3, b4, x_train, y_train, num_cl
     #IMPLEMENT HERE
     losses = []
     for i in range(epoch):
-        print("Epoch %d" % i)
+        #print("Epoch %d" % i)
         secondrange = len(x_train)/200
         losstotal = 0
 
@@ -40,7 +40,7 @@ def minibatch_gd(epoch, w1, w2, w3, w4, b1, b2, b3, b4, x_train, y_train, num_cl
             X = x_train[j*200:(j+1)*200]
             y = y_train[j*200:(j+1)*200]
             losstemp, w1, w2, w3, w4, b1, b2, b3, b4 = four_nn(X, w1, w2, w3, w4, b1, b2, b3, b4, y, test=False)
-            losstotal+=losstemp
+            losstotal += losstemp
         #print(losstemp)
         losses.append(losstotal)
     return w1, w2, w3, w4, b1, b2, b3, b4, losses
