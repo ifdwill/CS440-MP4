@@ -52,9 +52,9 @@ if __name__ == '__main__':
         w4, b4 = init_weights(256, 10)
 
     start_time = time.time()
-    #num_epochs = 10
+    num_epochs = 10
     #num_epochs = 30
-    num_epochs = 50
+    #num_epochs = 50
 
     w1, w2, w3, w4, b1, b2, b3, b4, losses = minibatch_gd(num_epochs, w1, w2, w3, w4, b1, b2, b3, b4, x_train, y_train, 10)
     print("---%s epochs: %s seconds ---" % (num_epochs, (time.time() - start_time)))
@@ -67,23 +67,23 @@ if __name__ == '__main__':
     np.save('b2', b2)
     np.save('b3', b3)
     np.save('b4', b4)
-    plt.plot(np.arange(num_epochs), losses)
-    plt.show()
-    wb1 = w1.copy()
-    wb1 = np.reshape(wb1, (784, 256))
+    #plt.plot(np.arange(num_epochs), losses)
+    #plt.show()
+    #wb1 = w1.copy()
+    #wb1 = np.reshape(wb1, (784, 256))
     #plot_visualization_layer1(wb1, None)
 
-    wb2 = w2.copy()
-    wb2 = np.reshape(wb2, (256, 256))
+    #wb2 = w2.copy()
+    #wb2 = np.reshape(wb2, (256, 256))
     #plot_visualization(wb2, None)
     
-    wb3 = w3.copy()
-    wb3 = np.reshape(wb3, (256, 256))
+    #wb3 = w3.copy()
+    #wb3 = np.reshape(wb3, (256, 256))
     #plot_visualization(wb3, None)
     
 
-    wb4 = w4.copy()
-    wb4 = np.reshape(wb4, (256, 10))
+    #wb4 = w4.copy()
+    #wb4 = np.reshape(wb4, (256, 10))
     #plot_visualization(wb4, None)
 
     avg_class_rate, class_rate_per_class = test_nn(w1, w2, w3, w4, b1, b2, b3, b4, x_test, y_test, 10)

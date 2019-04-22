@@ -1,16 +1,14 @@
 import numpy as np
-import matplotlib.pyplot as plt
+"import matplotlib.pyplot as plt"
 #from sklearn.metrics import confusion_matrix
 #from sklearn.utils.multiclass import unique_labels
-
+"""
 def plot_confusion_matrix(y_true, y_pred, classes,
                           normalize=False,
                           title=None,
                           cmap=plt.cm.Blues):
-    """
     This function prints and plots the confusion matrix.
     Normalization can be applied by setting `normalize=True`.
-    """
     if not title:
         if normalize:
             title = 'Normalized confusion matrix'
@@ -55,7 +53,7 @@ def plot_confusion_matrix(y_true, y_pred, classes,
                     color="white" if cm[i, j] > thresh else "black")
     fig.tight_layout()
     return ax
-
+"""
 """
     Minigratch Gradient Descent Function to train model
     1. Format the data
@@ -127,8 +125,8 @@ def test_nn(w1, w2, w3, w4, b1, b2, b3, b4, x_test, y_test, num_classes):
     classification = np.zeros(len(x_test))
     #print(len(x_test))
     
-    class_names = np.array(["T-shirt/top","Trouser","Pullover","Dress",
-        "Coat","Sandal","Shirt","Sneaker","Bag","Ankle boot"])
+    #class_names = np.array(["T-shirt/top","Trouser","Pullover","Dress",
+    #    "Coat","Sandal","Shirt","Sneaker","Bag","Ankle boot"])
     classification = four_nn(x_test, w1, w2, w3, w4, b1, b2, b3, b4, y_test, True)
     avg_class_rate = (classification == y_test).mean()
     y_unique, y_counts = np.unique(y_test, return_counts=True)
